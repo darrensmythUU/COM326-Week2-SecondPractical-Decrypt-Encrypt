@@ -11,8 +11,9 @@ class Program
 {
     public static void Main(string[] args)
     {
-        CountWords();
+        //CountWords();
         //Encrypt();
+        Decrypt();
     }
 
     public static void CountWords()
@@ -36,11 +37,11 @@ class Program
         Console.WriteLine("Enter the number of rotations you wish to encrypt by");
         int rotationAmount = Convert.ToInt32(Console.ReadLine());
 
-        // ASCII alphabet used to simply char rotations
+        // ASCII alphabet used to simplify char rotations
         byte[] asciiBytes = Encoding.ASCII.GetBytes(userSentence);
         for (int i = 0; i < splitUserSentence.Length; i++)
         {
-            // If ASCII code not a SPACE, rotates by 2. Done to stop all spaces becoming speechmarks
+            // If ASCII code is not a SPACE, rotates forwards by 2. Done to stop all spaces becoming speechmarks
             if (asciiBytes[i] != 32)
             {
                 asciiBytes[i] += (byte)rotationAmount;
@@ -51,5 +52,31 @@ class Program
 
         Console.WriteLine($"The sentence you inputted is: {userSentence}");
         Console.WriteLine($"The encrypted sentence is now: {encryptedUserSentence}.");
+    }
+
+    public static void Decrypt()
+    {
+        Console.WriteLine("Enter a string that you wish to decrypt.");
+        string userSentence = Console.ReadLine();
+        char[] splitUserSentence = userSentence.ToCharArray();
+
+        Console.WriteLine("Enter the number of rotations you wish to decrypt by");
+        int rotationAmount = Convert.ToInt32(Console.ReadLine());
+
+        // ASCII alphabet used to simplify char rotations
+        byte[] asciiBytes = Encoding.ASCII.GetBytes(userSentence);
+        for (int i = 0; i < splitUserSentence.Length; i++)
+        {
+            // If ASCII code is not a SPACE, rotates backwards by 2. Done to stop all spaces becoming speechmarks
+            if (asciiBytes[i] != 32)
+            {
+                asciiBytes[i] -= (byte)rotationAmount;
+                splitUserSentence[i] = (char)asciiBytes[i];
+            }
+        }
+        string decryptedUserSentence = new string(splitUserSentence);
+
+        Console.WriteLine($"The sentence you inputted is: {userSentence}");
+        Console.WriteLine($"The decrypted sentence is now: {decryptedUserSentence}.");
     }
 }
