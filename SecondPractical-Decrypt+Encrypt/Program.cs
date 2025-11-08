@@ -18,6 +18,7 @@ class Program
         bool exitBoolean = false;
         do
         {
+            option = 0;
             PrintEncryptDecryptMenu();
             option = InputOption(option);
 
