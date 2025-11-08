@@ -5,6 +5,8 @@
  * Date: October 6th 2026
  */
 
+using System;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 class Program
@@ -12,8 +14,53 @@ class Program
     public static void Main(string[] args)
     {
         //CountWords();
-        //Encrypt();
-        Decrypt();
+        int option = 0;
+        bool exitBoolean = false;
+        do
+        {
+            PrintEncryptDecryptMenu();
+            option = InputOption(option);
+
+            if (option == 0)
+            {
+                exitBoolean = true;
+            }
+            else if (option == 1)
+            {
+                Encrypt();
+            }
+            else
+            {
+                Decrypt();
+            }
+        } while (!exitBoolean);
+        Environment.Exit(0);
+    }
+
+    private static void PrintEncryptDecryptMenu()
+    {
+        // Prints a menu which allows the user to see the below options
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("Main Menu");
+        Console.WriteLine("Select an option from below: ");
+        Console.WriteLine("1 - Encrypt Text");
+        Console.WriteLine("2 - Decrypt Text");
+        Console.WriteLine("0 - End");
+    }
+
+    private static int InputOption(int methodOption)
+    {
+        try
+        {
+            // Stores the users choice as an integer variable and returns the integer value
+            methodOption = Convert.ToInt32(Console.ReadLine());
+        }
+        catch (FormatException ex)
+        {
+            // Handles the case where the input is not valid
+            Console.WriteLine("Please enter a valid number.");
+        }
+        return methodOption;
     }
 
     public static void CountWords()
